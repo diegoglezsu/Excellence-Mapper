@@ -1,0 +1,468 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 750px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+             #loadingBar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width: 100%;
+                 height: 750px;
+                 background-color:rgba(200,200,200,0.8);
+                 -webkit-transition: all 0.5s ease;
+                 -moz-transition: all 0.5s ease;
+                 -ms-transition: all 0.5s ease;
+                 -o-transition: all 0.5s ease;
+                 transition: all 0.5s ease;
+                 opacity:1;
+             }
+
+             #bar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width:20px;
+                 height:20px;
+                 margin:auto auto auto auto;
+                 border-radius:11px;
+                 border:2px solid rgba(30,30,30,0.05);
+                 background: rgb(0, 173, 246); /* Old browsers */
+                 box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+             }
+
+             #border {
+                 position:absolute;
+                 top:10px;
+                 left:10px;
+                 width:500px;
+                 height:23px;
+                 margin:auto auto auto auto;
+                 box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+                 border-radius:10px;
+             }
+
+             #text {
+                 position:absolute;
+                 top:8px;
+                 left:530px;
+                 width:30px;
+                 height:50px;
+                 margin:auto auto auto auto;
+                 font-size:22px;
+                 color: #000000;
+             }
+
+             div.outerBorder {
+                 position:relative;
+                 top:400px;
+                 width:600px;
+                 height:44px;
+                 margin:auto auto auto auto;
+                 border:8px solid rgba(0,0,0,0.1);
+                 background: rgb(252,252,252); /* Old browsers */
+                 background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+                 background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+                 background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+                 background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+                 background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+                 border-radius:72px;
+                 box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+             }
+             
+
+             
+             #config {
+                 float: left;
+                 width: 400px;
+                 height: 600px;
+             }
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+            <div id="loadingBar">
+              <div class="outerBorder">
+                <div id="text">0%</div>
+                <div id="border">
+                  <div id="bar"></div>
+                </div>
+              </div>
+            </div>
+        
+        
+            <div id="config"></div>
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Pedro Lorca Fernandez", "label": "Pedro Lorca Fernandez", "shape": "ellipse", "size": 25, "title": "Investigador: Pedro Lorca Fernandez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Contabilidad De La Real Compa\u00f1\u00eda Asturiana De Minas", "label": "Contabilidad De La Real Compa\u00f1\u00eda Asturiana De Minas", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Contabilidad De La Real Compa\u00f1\u00eda Asturiana De Minas"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Javier De Andres Suarez", "label": "Javier De Andres Suarez", "shape": "ellipse", "size": 25, "title": "Investigador: Javier De Andres Suarez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Dificultades En La Obtenci\u00f3n De Datos Contables", "label": "Dificultades En La Obtenci\u00f3n De Datos Contables", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Dificultades En La Obtenci\u00f3n De Datos Contables"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Archivos Empresariales Privados Del Siglo Xix", "label": "Archivos Empresariales Privados Del Siglo Xix", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Archivos Empresariales Privados Del Siglo Xix"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Maria Margarita Fernandez Mier", "label": "Maria Margarita Fernandez Mier", "shape": "ellipse", "size": 25, "title": "Investigador: Maria Margarita Fernandez Mier"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Historia De Cueiru", "label": "Historia De Cueiru", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Historia De Cueiru"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Proyecto Encomi", "label": "Proyecto Encomi", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Proyecto Encomi"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Miguel Enrique Del Valle Soto", "label": "Miguel Enrique Del Valle Soto", "shape": "ellipse", "size": 25, "title": "Investigador: Miguel Enrique Del Valle Soto"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Medicina Del Deporte", "label": "Medicina Del Deporte", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Medicina Del Deporte"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Alfonso Carlos Rodriguez Fernandez-Pe\u00f1a", "label": "Alfonso Carlos Rodriguez Fernandez-Pe\u00f1a", "shape": "ellipse", "size": 25, "title": "Investigador: Alfonso Carlos Rodriguez Fernandez-Pe\u00f1a"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Inteligencia Artificial En Traducci\u00f3n", "label": "Inteligencia Artificial En Traducci\u00f3n", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Inteligencia Artificial En Traducci\u00f3n"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Ana Cristina Lahuerta Martinez", "label": "Ana Cristina Lahuerta Martinez", "shape": "ellipse", "size": 25, "title": "Investigador: Ana Cristina Lahuerta Martinez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Competencia Intercultural", "label": "Competencia Intercultural", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Competencia Intercultural"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Carlos Gonzalez Gutierrez", "label": "Carlos Gonzalez Gutierrez", "shape": "ellipse", "size": 25, "title": "Investigador: Carlos Gonzalez Gutierrez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Herramientas Tecnol\u00f3gicas", "label": "Herramientas Tecnol\u00f3gicas", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Herramientas Tecnol\u00f3gicas"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Andre Carrascal Incera", "label": "Andre Carrascal Incera", "shape": "ellipse", "size": 25, "title": "Investigador: Andre Carrascal Incera"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "C\u00e1tedra De Innovaci\u00f3n", "label": "C\u00e1tedra De Innovaci\u00f3n", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: C\u00e1tedra De Innovaci\u00f3n"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Fernando Rubiera Morollon", "label": "Fernando Rubiera Morollon", "shape": "ellipse", "size": 25, "title": "Investigador: Fernando Rubiera Morollon"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Alfonso Joaquin Lopez Mu\u00f1iz", "label": "Alfonso Joaquin Lopez Mu\u00f1iz", "shape": "ellipse", "size": 25, "title": "Investigador: Alfonso Joaquin Lopez Mu\u00f1iz"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Ciencia Y Tecnolog\u00eda", "label": "Ciencia Y Tecnolog\u00eda", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Ciencia Y Tecnolog\u00eda"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Noemi Pinilla Alonso", "label": "Noemi Pinilla Alonso", "shape": "ellipse", "size": 25, "title": "Investigador: Noemi Pinilla Alonso"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Asteroides Met\u00e1licos", "label": "Asteroides Met\u00e1licos", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Asteroides Met\u00e1licos"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Proyecto R2", "label": "Proyecto R2", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Proyecto R2"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Francesco Dal Santo", "label": "Francesco Dal Santo", "shape": "ellipse", "size": 25, "title": "Investigador: Francesco Dal Santo"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Esquizofrenia", "label": "Esquizofrenia", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Esquizofrenia"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Noelia Blanco Agudin", "label": "Noelia Blanco Agudin", "shape": "ellipse", "size": 25, "title": "Investigador: Noelia Blanco Agudin"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Queratitis Bacteriana", "label": "Queratitis Bacteriana", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Queratitis Bacteriana"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Aurelio Antonio Gonzalez Ovies", "label": "Aurelio Antonio Gonzalez Ovies", "shape": "ellipse", "size": 25, "title": "Investigador: Aurelio Antonio Gonzalez Ovies"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Poes\u00eda", "label": "Poes\u00eda", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Poes\u00eda"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Miguel Angel Rodriguez Diaz", "label": "Miguel Angel Rodriguez Diaz", "shape": "ellipse", "size": 25, "title": "Investigador: Miguel Angel Rodriguez Diaz"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Rasgos Psicol\u00f3gicos De Atletas De Ultrarresistencia", "label": "Rasgos Psicol\u00f3gicos De Atletas De Ultrarresistencia", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Rasgos Psicol\u00f3gicos De Atletas De Ultrarresistencia"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Hugo Olmedillas Fernandez", "label": "Hugo Olmedillas Fernandez", "shape": "ellipse", "size": 25, "title": "Investigador: Hugo Olmedillas Fernandez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Dependencia Al Ejercicio", "label": "Dependencia Al Ejercicio", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Dependencia Al Ejercicio"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Ana Isabel Alvarez Gonzalez", "label": "Ana Isabel Alvarez Gonzalez", "shape": "ellipse", "size": 25, "title": "Investigador: Ana Isabel Alvarez Gonzalez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Alianza Ingenium", "label": "Alianza Ingenium", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Alianza Ingenium"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Ana Suarez Alvarez", "label": "Ana Suarez Alvarez", "shape": "ellipse", "size": 25, "title": "Investigador: Ana Suarez Alvarez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Econom\u00eda", "label": "Econom\u00eda", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Econom\u00eda"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Ruben Usamentiaga Fernandez", "label": "Ruben Usamentiaga Fernandez", "shape": "ellipse", "size": 25, "title": "Investigador: Ruben Usamentiaga Fernandez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "C\u00e1tedra Gonvarri Metal Structures R\u0026D", "label": "C\u00e1tedra Gonvarri Metal Structures R\u0026D", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: C\u00e1tedra Gonvarri Metal Structures R\u0026D"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Tecnolog\u00edas Aplicadas Al \u00c1mbito Industrial", "label": "Tecnolog\u00edas Aplicadas Al \u00c1mbito Industrial", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Tecnolog\u00edas Aplicadas Al \u00c1mbito Industrial"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Entorno Experimental En La Escuela Polit\u00e9cnica De Ingenier\u00eda De Gij\u00f3n", "label": "Entorno Experimental En La Escuela Polit\u00e9cnica De Ingenier\u00eda De Gij\u00f3n", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Entorno Experimental En La Escuela Polit\u00e9cnica De Ingenier\u00eda De Gij\u00f3n"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Eduardo Fernandez Alonso", "label": "Eduardo Fernandez Alonso", "shape": "ellipse", "size": 25, "title": "Investigador: Eduardo Fernandez Alonso"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Germinaci\u00f3n De Semillas", "label": "Germinaci\u00f3n De Semillas", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Germinaci\u00f3n De Semillas"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Seedarc", "label": "Seedarc", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Seedarc"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Investigaci\u00f3n Sobre Regeneraci\u00f3n Vegetal", "label": "Investigaci\u00f3n Sobre Regeneraci\u00f3n Vegetal", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Investigaci\u00f3n Sobre Regeneraci\u00f3n Vegetal"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Jose Ranilla Pastor", "label": "Jose Ranilla Pastor", "shape": "ellipse", "size": 25, "title": "Investigador: Jose Ranilla Pastor"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Tecnolog\u00edas Cu\u00e1nticas", "label": "Tecnolog\u00edas Cu\u00e1nticas", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Tecnolog\u00edas Cu\u00e1nticas"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Marina Dader Suarez", "label": "Marina Dader Suarez", "shape": "ellipse", "size": 25, "title": "Investigador: Marina Dader Suarez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Inteligencia Artificial", "label": "Inteligencia Artificial", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Inteligencia Artificial"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Borja Jim\u00e9nez-Alfaro", "label": "Borja Jim\u00e9nez-Alfaro", "shape": "ellipse", "size": 25, "title": "Investigador: Borja Jim\u00e9nez-Alfaro"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Conservaci\u00f3n De Ecosistemas", "label": "Conservaci\u00f3n De Ecosistemas", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Conservaci\u00f3n De Ecosistemas"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Nuevo Enfoque Para Conservaci\u00f3n De Ecosistemas", "label": "Nuevo Enfoque Para Conservaci\u00f3n De Ecosistemas", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Nuevo Enfoque Para Conservaci\u00f3n De Ecosistemas"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Estudio Sobre H\u00e1bitats Ibero-Atl\u00e1nticos", "label": "Estudio Sobre H\u00e1bitats Ibero-Atl\u00e1nticos", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Estudio Sobre H\u00e1bitats Ibero-Atl\u00e1nticos"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Victor Manuel Meana Diaz", "label": "Victor Manuel Meana Diaz", "shape": "ellipse", "size": 25, "title": "Investigador: Victor Manuel Meana Diaz"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Calidad En La Fabricaci\u00f3n Aditiva", "label": "Calidad En La Fabricaci\u00f3n Aditiva", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Calidad En La Fabricaci\u00f3n Aditiva"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Braulio Jose Alvarez Alvarez", "label": "Braulio Jose Alvarez Alvarez", "shape": "ellipse", "size": 25, "title": "Investigador: Braulio Jose Alvarez Alvarez"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Susana Al-Halabi Diaz", "label": "Susana Al-Halabi Diaz", "shape": "ellipse", "size": 25, "title": "Investigador: Susana Al-Halabi Diaz"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Prevenci\u00f3n De La Conducta Suicida", "label": "Prevenci\u00f3n De La Conducta Suicida", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Prevenci\u00f3n De La Conducta Suicida"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Victor Martinez Loredo", "label": "Victor Martinez Loredo", "shape": "ellipse", "size": 25, "title": "Investigador: Victor Martinez Loredo"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "An\u00e1lisis Estad\u00edstico", "label": "An\u00e1lisis Estad\u00edstico", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: An\u00e1lisis Estad\u00edstico"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Jose Manuel Errasti Perez", "label": "Jose Manuel Errasti Perez", "shape": "ellipse", "size": 25, "title": "Investigador: Jose Manuel Errasti Perez"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Ramon Sobrino Sanchez", "label": "Ramon Sobrino Sanchez", "shape": "ellipse", "size": 25, "title": "Investigador: Ramon Sobrino Sanchez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Festival Universitario De M\u00fasica", "label": "Festival Universitario De M\u00fasica", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Festival Universitario De M\u00fasica"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Nerea Lopez Bouzas", "label": "Nerea Lopez Bouzas", "shape": "ellipse", "size": 25, "title": "Investigador: Nerea Lopez Bouzas"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Alfabetizaci\u00f3n Medi\u00e1tica Y Cient\u00edfica", "label": "Alfabetizaci\u00f3n Medi\u00e1tica Y Cient\u00edfica", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Alfabetizaci\u00f3n Medi\u00e1tica Y Cient\u00edfica"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Maria Carmen Bellver Moreno", "label": "Maria Carmen Bellver Moreno", "shape": "ellipse", "size": 25, "title": "Investigador: Maria Carmen Bellver Moreno"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Estrategias De Ense\u00f1anza En Ciencias", "label": "Estrategias De Ense\u00f1anza En Ciencias", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Estrategias De Ense\u00f1anza En Ciencias"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Celestino Rodriguez Perez", "label": "Celestino Rodriguez Perez", "shape": "ellipse", "size": 25, "title": "Investigador: Celestino Rodriguez Perez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Dificultades De Aprendizaje", "label": "Dificultades De Aprendizaje", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Dificultades De Aprendizaje"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Autoeficacia Acad\u00e9mica Y Aprendizaje Autorregulado", "label": "Autoeficacia Acad\u00e9mica Y Aprendizaje Autorregulado", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Autoeficacia Acad\u00e9mica Y Aprendizaje Autorregulado"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Ejercicio F\u00edsico En Adolescentes Con C\u00e1ncer", "label": "Ejercicio F\u00edsico En Adolescentes Con C\u00e1ncer", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Ejercicio F\u00edsico En Adolescentes Con C\u00e1ncer"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Maria Mercedes Gonzalez De Sande", "label": "Maria Mercedes Gonzalez De Sande", "shape": "ellipse", "size": 25, "title": "Investigador: Maria Mercedes Gonzalez De Sande"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Proyecto Superh\u00e9roes", "label": "Proyecto Superh\u00e9roes", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Proyecto Superh\u00e9roes"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Carlos Cabo Gomez", "label": "Carlos Cabo Gomez", "shape": "ellipse", "size": 25, "title": "Investigador: Carlos Cabo Gomez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Seguimiento De Fauna En Parques E\u00f3licos", "label": "Seguimiento De Fauna En Parques E\u00f3licos", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Seguimiento De Fauna En Parques E\u00f3licos"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Emma Zapico Fernandez", "label": "Emma Zapico Fernandez", "shape": "ellipse", "size": 25, "title": "Investigador: Emma Zapico Fernandez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Proyecto Esparde", "label": "Proyecto Esparde", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Proyecto Esparde"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Ana Belen Ramos Guajardo", "label": "Ana Belen Ramos Guajardo", "shape": "ellipse", "size": 25, "title": "Investigador: Ana Belen Ramos Guajardo"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Arturo Colina Vuelta", "label": "Arturo Colina Vuelta", "shape": "ellipse", "size": 25, "title": "Investigador: Arturo Colina Vuelta"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Noelia Rico Pachon", "label": "Noelia Rico Pachon", "shape": "ellipse", "size": 25, "title": "Investigador: Noelia Rico Pachon"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Aplicaci\u00f3n Para La Gesti\u00f3n De Licencias Urban\u00edsticas", "label": "Aplicaci\u00f3n Para La Gesti\u00f3n De Licencias Urban\u00edsticas", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Aplicaci\u00f3n Para La Gesti\u00f3n De Licencias Urban\u00edsticas"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Ana Isabel Gonzalez Gonzalez", "label": "Ana Isabel Gonzalez Gonzalez", "shape": "ellipse", "size": 25, "title": "Investigador: Ana Isabel Gonzalez Gonzalez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Derecho Financiero Y Tributario", "label": "Derecho Financiero Y Tributario", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Derecho Financiero Y Tributario"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Ignacio Rodriguez", "label": "Ignacio Rodriguez", "shape": "ellipse", "size": 25, "title": "Investigador: Ignacio Rodriguez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Proyectos De Investigaci\u00f3n", "label": "Proyectos De Investigaci\u00f3n", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Proyectos De Investigaci\u00f3n"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Comunicaci\u00f3n En Personas Con Autismo", "label": "Comunicaci\u00f3n En Personas Con Autismo", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Comunicaci\u00f3n En Personas Con Autismo"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Entorno De Aprendizaje Gamificado Y Aumentado", "label": "Entorno De Aprendizaje Gamificado Y Aumentado", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Entorno De Aprendizaje Gamificado Y Aumentado"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Investigaci\u00f3n Sobre Gamificaci\u00f3n Y Realidad Aumentada", "label": "Investigaci\u00f3n Sobre Gamificaci\u00f3n Y Realidad Aumentada", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Investigaci\u00f3n Sobre Gamificaci\u00f3n Y Realidad Aumentada"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Maria Pilar Garces Garcia", "label": "Maria Pilar Garces Garcia", "shape": "ellipse", "size": 25, "title": "Investigador: Maria Pilar Garces Garcia"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Pintura", "label": "Pintura", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Pintura"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "German Flor Blanco", "label": "German Flor Blanco", "shape": "ellipse", "size": 25, "title": "Investigador: German Flor Blanco"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Evoluci\u00f3n Del Estuario Del Nal\u00f3n", "label": "Evoluci\u00f3n Del Estuario Del Nal\u00f3n", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Evoluci\u00f3n Del Estuario Del Nal\u00f3n"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Efren Garcia Ordiales", "label": "Efren Garcia Ordiales", "shape": "ellipse", "size": 25, "title": "Investigador: Efren Garcia Ordiales"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Contaminaci\u00f3n Antr\u00f3pica En El Estuario Del Nal\u00f3n", "label": "Contaminaci\u00f3n Antr\u00f3pica En El Estuario Del Nal\u00f3n", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Contaminaci\u00f3n Antr\u00f3pica En El Estuario Del Nal\u00f3n"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Jose Manuel Lopez Garcia", "label": "Jose Manuel Lopez Garcia", "shape": "ellipse", "size": 25, "title": "Investigador: Jose Manuel Lopez Garcia"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Biomedicina", "label": "Biomedicina", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Biomedicina"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Red 5G", "label": "Red 5G", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Red 5G"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Luis Fernando Herran Onta\u00f1on", "label": "Luis Fernando Herran Onta\u00f1on", "shape": "ellipse", "size": 25, "title": "Investigador: Luis Fernando Herran Onta\u00f1on"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Rafael Gonzalez Ayestaran", "label": "Rafael Gonzalez Ayestaran", "shape": "ellipse", "size": 25, "title": "Investigador: Rafael Gonzalez Ayestaran"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Alba Garcia Torres", "label": "Alba Garcia Torres", "shape": "ellipse", "size": 25, "title": "Investigador: Alba Garcia Torres"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Regulaci\u00f3n Del Tiempo Desde Una Perspectiva Feminista", "label": "Regulaci\u00f3n Del Tiempo Desde Una Perspectiva Feminista", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Regulaci\u00f3n Del Tiempo Desde Una Perspectiva Feminista"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Invisibilizaci\u00f3n Del Trabajo Reproductivo Y De Cuidados", "label": "Invisibilizaci\u00f3n Del Trabajo Reproductivo Y De Cuidados", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Invisibilizaci\u00f3n Del Trabajo Reproductivo Y De Cuidados"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Enfoque De Derecho Al Tiempo", "label": "Enfoque De Derecho Al Tiempo", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Enfoque De Derecho Al Tiempo"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Raquel Maria Gonzalez Soengas", "label": "Raquel Maria Gonzalez Soengas", "shape": "ellipse", "size": 25, "title": "Investigador: Raquel Maria Gonzalez Soengas"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Impacto De Los Desastres Naturales En La Salud Mental", "label": "Impacto De Los Desastres Naturales En La Salud Mental", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Impacto De Los Desastres Naturales En La Salud Mental"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Susana Montes Rodriguez", "label": "Susana Montes Rodriguez", "shape": "ellipse", "size": 25, "title": "Investigador: Susana Montes Rodriguez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Escuela Internacional De Doctorado", "label": "Escuela Internacional De Doctorado", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Escuela Internacional De Doctorado"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "David Roiz Del Valle", "label": "David Roiz Del Valle", "shape": "ellipse", "size": 25, "title": "Investigador: David Roiz Del Valle"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Biomedicina Y Oncolog\u00eda Molecular", "label": "Biomedicina Y Oncolog\u00eda Molecular", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Biomedicina Y Oncolog\u00eda Molecular"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "David Alvarez Fernandez", "label": "David Alvarez Fernandez", "shape": "ellipse", "size": 25, "title": "Investigador: David Alvarez Fernandez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Cormor\u00e1n Mo\u00f1udo", "label": "Cormor\u00e1n Mo\u00f1udo", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Cormor\u00e1n Mo\u00f1udo"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Pa\u00ed\u00f1o Europeo", "label": "Pa\u00ed\u00f1o Europeo", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Pa\u00ed\u00f1o Europeo"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Proyecto Cormi\u00f1os", "label": "Proyecto Cormi\u00f1os", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Proyecto Cormi\u00f1os"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Maria Jose Garcia Salgado", "label": "Maria Jose Garcia Salgado", "shape": "ellipse", "size": 25, "title": "Investigador: Maria Jose Garcia Salgado"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Proyecto De Investigaci\u00f3n Smartwar", "label": "Proyecto De Investigaci\u00f3n Smartwar", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Proyecto De Investigaci\u00f3n Smartwar"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Juan Manuel Marchante Gayon", "label": "Juan Manuel Marchante Gayon", "shape": "ellipse", "size": 25, "title": "Investigador: Juan Manuel Marchante Gayon"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Modificaciones De Planes De Estudio", "label": "Modificaciones De Planes De Estudio", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Modificaciones De Planes De Estudio"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Bego\u00f1a Fernandez Perez", "label": "Bego\u00f1a Fernandez Perez", "shape": "ellipse", "size": 25, "title": "Investigador: Bego\u00f1a Fernandez Perez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Materiales Refractarios", "label": "Materiales Refractarios", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Materiales Refractarios"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Alvaro Rubio Ordo\u00f1ez", "label": "Alvaro Rubio Ordo\u00f1ez", "shape": "ellipse", "size": 25, "title": "Investigador: Alvaro Rubio Ordo\u00f1ez"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Miriam Perandones Lozano", "label": "Miriam Perandones Lozano", "shape": "ellipse", "size": 25, "title": "Investigador: Miriam Perandones Lozano"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "La Po\u00e9tica Del Carnaval De C\u00e1diz", "label": "La Po\u00e9tica Del Carnaval De C\u00e1diz", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: La Po\u00e9tica Del Carnaval De C\u00e1diz"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Maria Esteban Garcia", "label": "Maria Esteban Garcia", "shape": "ellipse", "size": 25, "title": "Investigador: Maria Esteban Garcia"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "D\u00e9cima-Canci\u00f3n", "label": "D\u00e9cima-Canci\u00f3n", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: D\u00e9cima-Canci\u00f3n"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Isabel Quiros Gonzalez", "label": "Isabel Quiros Gonzalez", "shape": "ellipse", "size": 25, "title": "Investigador: Isabel Quiros Gonzalez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "M\u00e9todo In Vitro Para Identificar Radicales Libres En Sangre", "label": "M\u00e9todo In Vitro Para Identificar Radicales Libres En Sangre", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: M\u00e9todo In Vitro Para Identificar Radicales Libres En Sangre"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Sonia Gonzalez Solares", "label": "Sonia Gonzalez Solares", "shape": "ellipse", "size": 25, "title": "Investigador: Sonia Gonzalez Solares"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Investigaci\u00f3n En Fisiolog\u00eda", "label": "Investigaci\u00f3n En Fisiolog\u00eda", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Investigaci\u00f3n En Fisiolog\u00eda"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Jose Antonio Lopez Cerezo", "label": "Jose Antonio Lopez Cerezo", "shape": "ellipse", "size": 25, "title": "Investigador: Jose Antonio Lopez Cerezo"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "C\u00e1tedra De Cultura Cient\u00edfica", "label": "C\u00e1tedra De Cultura Cient\u00edfica", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: C\u00e1tedra De Cultura Cient\u00edfica"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Rosa Maria Cid Lopez", "label": "Rosa Maria Cid Lopez", "shape": "ellipse", "size": 25, "title": "Investigador: Rosa Maria Cid Lopez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Promoci\u00f3n De La Igualdad Y Lucha Contra La Violencia De G\u00e9nero", "label": "Promoci\u00f3n De La Igualdad Y Lucha Contra La Violencia De G\u00e9nero", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Promoci\u00f3n De La Igualdad Y Lucha Contra La Violencia De G\u00e9nero"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Maria Isabel Carrera Suarez", "label": "Maria Isabel Carrera Suarez", "shape": "ellipse", "size": 25, "title": "Investigador: Maria Isabel Carrera Suarez"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Alfonso Ortega De La Puente", "label": "Alfonso Ortega De La Puente", "shape": "ellipse", "size": 25, "title": "Investigador: Alfonso Ortega De La Puente"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "M\u00e1ster De Abogac\u00eda Y Procura", "label": "M\u00e1ster De Abogac\u00eda Y Procura", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: M\u00e1ster De Abogac\u00eda Y Procura"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Maria Paz Fernandez Garcia", "label": "Maria Paz Fernandez Garcia", "shape": "ellipse", "size": 25, "title": "Investigador: Maria Paz Fernandez Garcia"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Semana De La Ciencia", "label": "Semana De La Ciencia", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Semana De La Ciencia"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Beatriz Fernandez Garcia", "label": "Beatriz Fernandez Garcia", "shape": "ellipse", "size": 25, "title": "Investigador: Beatriz Fernandez Garcia"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Carlos Fernandez Garcia", "label": "Carlos Fernandez Garcia", "shape": "ellipse", "size": 25, "title": "Investigador: Carlos Fernandez Garcia"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Ana Yolanda Gutierrez Fernandez", "label": "Ana Yolanda Gutierrez Fernandez", "shape": "ellipse", "size": 25, "title": "Investigador: Ana Yolanda Gutierrez Fernandez"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Miguel Fernandez Garcia", "label": "Miguel Fernandez Garcia", "shape": "ellipse", "size": 25, "title": "Investigador: Miguel Fernandez Garcia"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Oscar Rodriguez Prieto", "label": "Oscar Rodriguez Prieto", "shape": "ellipse", "size": 25, "title": "Investigador: Oscar Rodriguez Prieto"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "C\u00e1tedra Universitaria De Demograf\u00eda", "label": "C\u00e1tedra Universitaria De Demograf\u00eda", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: C\u00e1tedra Universitaria De Demograf\u00eda"}, {"color": "#38bdf8", "font": {"color": "#0f172a"}, "id": "Vanesa Agustina Solis Rodriguez", "label": "Vanesa Agustina Solis Rodriguez", "shape": "ellipse", "size": 25, "title": "Investigador: Vanesa Agustina Solis Rodriguez"}, {"color": "#fb923c", "font": {"color": "#0f172a"}, "id": "Informe Gem", "label": "Informe Gem", "shape": "box", "size": 20, "title": "T\u00f3pico Can\u00f3nico: Informe Gem"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Pedro Lorca Fernandez", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Contabilidad De La Real Compa\u00f1\u00eda Asturiana De Minas"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Javier De Andres Suarez", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Contabilidad De La Real Compa\u00f1\u00eda Asturiana De Minas"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Javier De Andres Suarez", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Dificultades En La Obtenci\u00f3n De Datos Contables"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Javier De Andres Suarez", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Archivos Empresariales Privados Del Siglo Xix"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Maria Margarita Fernandez Mier", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Historia De Cueiru"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Maria Margarita Fernandez Mier", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Proyecto Encomi"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Miguel Enrique Del Valle Soto", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Medicina Del Deporte"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Alfonso Carlos Rodriguez Fernandez-Pe\u00f1a", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Inteligencia Artificial En Traducci\u00f3n"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Ana Cristina Lahuerta Martinez", "label": "DESARROLLA", "title": "Relaci\u00f3n: DESARROLLA", "to": "Competencia Intercultural"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Carlos Gonzalez Gutierrez", "label": "DESARROLLA", "title": "Relaci\u00f3n: DESARROLLA", "to": "Herramientas Tecnol\u00f3gicas"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Andre Carrascal Incera", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "C\u00e1tedra De Innovaci\u00f3n"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Fernando Rubiera Morollon", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "C\u00e1tedra De Innovaci\u00f3n"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Alfonso Joaquin Lopez Mu\u00f1iz", "label": "DESARROLLA", "title": "Relaci\u00f3n: DESARROLLA", "to": "Ciencia Y Tecnolog\u00eda"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Noemi Pinilla Alonso", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Asteroides Met\u00e1licos"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Noemi Pinilla Alonso", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "Proyecto R2"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Francesco Dal Santo", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Esquizofrenia"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Noelia Blanco Agudin", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Queratitis Bacteriana"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Aurelio Antonio Gonzalez Ovies", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Poes\u00eda"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Miguel Angel Rodriguez Diaz", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "Rasgos Psicol\u00f3gicos De Atletas De Ultrarresistencia"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Hugo Olmedillas Fernandez", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Dependencia Al Ejercicio"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Ana Isabel Alvarez Gonzalez", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "Alianza Ingenium"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Ana Suarez Alvarez", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Econom\u00eda"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Ruben Usamentiaga Fernandez", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "C\u00e1tedra Gonvarri Metal Structures R\u0026D"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Ruben Usamentiaga Fernandez", "label": "DESARROLLA", "title": "Relaci\u00f3n: DESARROLLA", "to": "Tecnolog\u00edas Aplicadas Al \u00c1mbito Industrial"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Ruben Usamentiaga Fernandez", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Entorno Experimental En La Escuela Polit\u00e9cnica De Ingenier\u00eda De Gij\u00f3n"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Eduardo Fernandez Alonso", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Germinaci\u00f3n De Semillas"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Eduardo Fernandez Alonso", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Seedarc"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Eduardo Fernandez Alonso", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "Investigaci\u00f3n Sobre Regeneraci\u00f3n Vegetal"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Jose Ranilla Pastor", "label": "DESARROLLA", "title": "Relaci\u00f3n: DESARROLLA", "to": "Tecnolog\u00edas Cu\u00e1nticas"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Jose Ranilla Pastor", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Tecnolog\u00edas Cu\u00e1nticas"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Marina Dader Suarez", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Inteligencia Artificial"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Borja Jim\u00e9nez-Alfaro", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Conservaci\u00f3n De Ecosistemas"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Borja Jim\u00e9nez-Alfaro", "label": "DESARROLLA", "title": "Relaci\u00f3n: DESARROLLA", "to": "Nuevo Enfoque Para Conservaci\u00f3n De Ecosistemas"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Borja Jim\u00e9nez-Alfaro", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "Estudio Sobre H\u00e1bitats Ibero-Atl\u00e1nticos"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Victor Manuel Meana Diaz", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Calidad En La Fabricaci\u00f3n Aditiva"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Braulio Jose Alvarez Alvarez", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Calidad En La Fabricaci\u00f3n Aditiva"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Susana Al-Halabi Diaz", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "Prevenci\u00f3n De La Conducta Suicida"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Victor Martinez Loredo", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "An\u00e1lisis Estad\u00edstico"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Jose Manuel Errasti Perez", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Prevenci\u00f3n De La Conducta Suicida"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Ramon Sobrino Sanchez", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Festival Universitario De M\u00fasica"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Nerea Lopez Bouzas", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Alfabetizaci\u00f3n Medi\u00e1tica Y Cient\u00edfica"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Maria Carmen Bellver Moreno", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Estrategias De Ense\u00f1anza En Ciencias"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Celestino Rodriguez Perez", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "Dificultades De Aprendizaje"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Celestino Rodriguez Perez", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Autoeficacia Acad\u00e9mica Y Aprendizaje Autorregulado"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Miguel Enrique Del Valle Soto", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Ejercicio F\u00edsico En Adolescentes Con C\u00e1ncer"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Maria Mercedes Gonzalez De Sande", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "Proyecto Superh\u00e9roes"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Carlos Cabo Gomez", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Seguimiento De Fauna En Parques E\u00f3licos"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Emma Zapico Fernandez", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Proyecto Esparde"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Ana Belen Ramos Guajardo", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Proyecto Esparde"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Arturo Colina Vuelta", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Proyecto Esparde"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Fernando Rubiera Morollon", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "C\u00e1tedra De Innovaci\u00f3n"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Noelia Rico Pachon", "label": "DESARROLLA", "title": "Relaci\u00f3n: DESARROLLA", "to": "Aplicaci\u00f3n Para La Gesti\u00f3n De Licencias Urban\u00edsticas"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Ana Isabel Gonzalez Gonzalez", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Derecho Financiero Y Tributario"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Ignacio Rodriguez", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "Proyectos De Investigaci\u00f3n"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Nerea Lopez Bouzas", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Comunicaci\u00f3n En Personas Con Autismo"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Nerea Lopez Bouzas", "label": "DESARROLLA", "title": "Relaci\u00f3n: DESARROLLA", "to": "Entorno De Aprendizaje Gamificado Y Aumentado"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Nerea Lopez Bouzas", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "Investigaci\u00f3n Sobre Gamificaci\u00f3n Y Realidad Aumentada"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Maria Pilar Garces Garcia", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Pintura"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "German Flor Blanco", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Evoluci\u00f3n Del Estuario Del Nal\u00f3n"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Efren Garcia Ordiales", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Contaminaci\u00f3n Antr\u00f3pica En El Estuario Del Nal\u00f3n"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Jose Manuel Lopez Garcia", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Biomedicina"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Ignacio Rodriguez", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Red 5G"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Luis Fernando Herran Onta\u00f1on", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Red 5G"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Rafael Gonzalez Ayestaran", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Red 5G"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Alba Garcia Torres", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "Regulaci\u00f3n Del Tiempo Desde Una Perspectiva Feminista"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Alba Garcia Torres", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Invisibilizaci\u00f3n Del Trabajo Reproductivo Y De Cuidados"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Alba Garcia Torres", "label": "DESARROLLA", "title": "Relaci\u00f3n: DESARROLLA", "to": "Enfoque De Derecho Al Tiempo"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Raquel Maria Gonzalez Soengas", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Impacto De Los Desastres Naturales En La Salud Mental"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Susana Montes Rodriguez", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "Escuela Internacional De Doctorado"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "David Roiz Del Valle", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "Biomedicina Y Oncolog\u00eda Molecular"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "David Alvarez Fernandez", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Cormor\u00e1n Mo\u00f1udo"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "David Alvarez Fernandez", "label": "INVESTIGA_SOBRE", "title": "Relaci\u00f3n: INVESTIGA_SOBRE", "to": "Pa\u00ed\u00f1o Europeo"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "David Alvarez Fernandez", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Proyecto Cormi\u00f1os"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Maria Jose Garcia Salgado", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Proyecto De Investigaci\u00f3n Smartwar"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Juan Manuel Marchante Gayon", "label": "DESARROLLA", "title": "Relaci\u00f3n: DESARROLLA", "to": "Modificaciones De Planes De Estudio"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Bego\u00f1a Fernandez Perez", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "Materiales Refractarios"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Alvaro Rubio Ordo\u00f1ez", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Materiales Refractarios"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Miriam Perandones Lozano", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "La Po\u00e9tica Del Carnaval De C\u00e1diz"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Maria Esteban Garcia", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "D\u00e9cima-Canci\u00f3n"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Isabel Quiros Gonzalez", "label": "DESARROLLA", "title": "Relaci\u00f3n: DESARROLLA", "to": "M\u00e9todo In Vitro Para Identificar Radicales Libres En Sangre"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Sonia Gonzalez Solares", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "Investigaci\u00f3n En Fisiolog\u00eda"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Jose Antonio Lopez Cerezo", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "C\u00e1tedra De Cultura Cient\u00edfica"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Rosa Maria Cid Lopez", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Promoci\u00f3n De La Igualdad Y Lucha Contra La Violencia De G\u00e9nero"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Maria Isabel Carrera Suarez", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Promoci\u00f3n De La Igualdad Y Lucha Contra La Violencia De G\u00e9nero"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Alfonso Ortega De La Puente", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "M\u00e1ster De Abogac\u00eda Y Procura"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Maria Paz Fernandez Garcia", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Semana De La Ciencia"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Beatriz Fernandez Garcia", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Semana De La Ciencia"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Carlos Fernandez Garcia", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Semana De La Ciencia"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Ana Yolanda Gutierrez Fernandez", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Semana De La Ciencia"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Miguel Fernandez Garcia", "label": "COLABORA_EN", "title": "Relaci\u00f3n: COLABORA_EN", "to": "Semana De La Ciencia"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Oscar Rodriguez Prieto", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "C\u00e1tedra Universitaria De Demograf\u00eda"}, {"arrows": "to", "color": "#94a3b8", "font": {"align": "middle", "size": 10}, "from": "Vanesa Agustina Solis Rodriguez", "label": "LIDERA", "title": "Relaci\u00f3n: LIDERA", "to": "Informe Gem"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "physics"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "forceAtlas2Based": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.01,
+            "damping": 0.4,
+            "gravitationalConstant": -50,
+            "springConstant": 0.08,
+            "springLength": 100
+        },
+        "solver": "forceAtlas2Based",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+                  // if this network requires displaying the configure window,
+                  // put it in its div
+                  options.configure["container"] = document.getElementById("config");
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+                      network.on("stabilizationProgress", function(params) {
+                          document.getElementById('loadingBar').removeAttribute("style");
+                          var maxWidth = 496;
+                          var minWidth = 20;
+                          var widthFactor = params.iterations/params.total;
+                          var width = Math.max(minWidth,maxWidth * widthFactor);
+                          document.getElementById('bar').style.width = width + 'px';
+                          document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+                      });
+                      network.once("stabilizationIterationsDone", function() {
+                          document.getElementById('text').innerHTML = '100%';
+                          document.getElementById('bar').style.width = '496px';
+                          document.getElementById('loadingBar').style.opacity = 0;
+                          // really clean the dom element
+                          setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+                      });
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

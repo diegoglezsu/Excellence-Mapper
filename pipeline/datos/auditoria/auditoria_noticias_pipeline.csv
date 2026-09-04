@@ -1,0 +1,304 @@
+news_id,titulo,status,num_candidatos,num_roles,num_tripletas_raw,num_tripletas_aceptadas,num_tripletas_rechazadas
+0,La nueva Junta Rectora de CRUE se reúne con el presidente del Gobierno en La Moncloa,ok,1,1,0,0,0
+1,La Universidad de Oviedo reconstruye los orígenes contables de una empresa minera pionera en la industrialización asturiana,ok,2,2,2,1,1
+2,La Universidá Asturiana de Branu incorpora la inteligencia artificial a su oferta formativa,ok,2,2,0,0,0
+3,El grupo Llabor de la Universidad de Oviedo regresa a Cueiru para desvelar el origen de una de las ferias más antiguas del Noroeste,ok,1,1,3,0,3
+4,"El 81,43% del estudiantado aprueba la PAU en la convocatoria de julio",sin_candidatos,0,0,0,0,0
+5,Los Picos de Europa esconden un ‘amortiguador’ geológico natural que evita la formación de terremotos,ok,13,6,6,0,6
+6,La Real Sociedad Española de Física premia la tesis doctoral de Clara Ramón Álvarez en la Universidad de Oviedo,ok,11,11,2,0,2
+7,La Universidad de Oviedo publica la primera lista de admisión en estudios de grado con límite de plazas para el próximo curso,sin_candidatos,0,0,0,0,0
+8,Treinta estudiantes de la Universidad de Oviedo completan  su formación en EDP,ok,3,3,0,0,0
+9,La Universidad de Oviedo muestra sus buenas prácticas en internacionalización en unas jornadas de CRUE,ok,10,10,4,1,3
+10,La Comisión Europea asegura la financiación para la alianza INGENIUM hasta 2028,ok,1,1,0,0,0
+11,Un curso de verano analizará en Piloña los últimos avances sobre la paleobiología de los neandertales,sin_candidatos,0,0,0,0,0
+12,El primer estudio de la Cátedra Universitaria de Demografía revela que la pérdida de población es la segunda preocupación de los asturianos solo por detrás de la vivienda,ok,2,2,1,1,0
+13,Abierta la convocatoria de ayudas de INGENIUM para la movilidad y la cosupervisión de tesis doctorales,sin_candidatos,0,0,0,0,0
+14,La Universidad de Oviedo reconoce la trayectoria de los catedráticos José Antonio Cecchini y Miguel del Valle,ok,12,12,2,2,0
+15,Abierto el plazo de solicitud de los Blended Intensive Programmes de INGENIUM para el curso 2026/2027,sin_candidatos,0,0,0,0,0
+16,La Universidad de Oviedo reúne a especialistas internacionales para analizar el impacto de la inteligencia artificial en la enseñanza de lenguas,ok,3,3,2,0,2
+17,La Universidad de Oviedo identifica especies nativas para restaurar espacios urbanos degradados,ok,4,2,4,0,4
+18,"La Universidad de Oviedo desarrolla DubbiOvi, una plataforma abierta para la traducción audiovisual potenciada con inteligencia artificial",ok,3,1,2,2,0
+19,El rector valora la “buena disposición” del presidente del Principado para avanzar en los principales retos de la Universidad de Oviedo,ok,1,1,2,1,1
+20,Gijón reunirá a expertos internacionales en instrumentación electrónica y en gestión de la energía en el ámbito de la inteligencia artificial y el espacio durante el SAAEI 2026,ok,14,4,3,2,1
+21,La Universidad de Oviedo reúne a especialistas nacionales e internacionales para analizar el futuro de las carreteras históricas como patrimonio y recurso turístico,ok,7,8,6,1,5
+22,La Universidad de Oviedo recibe este verano a 300 estudiantes en sus cursos intensivos de español para extranjeros,ok,3,3,0,0,0
+23,Un universitario ovetense que publicó su observación del eclipse del año 1860 da nombre al asteroide ‘14918 Gonzálezalegre’,ok,6,2,1,0,1
+24,El Edificio Histórico de la Universidad de Oviedo acoge la exposición 'Tejiendo solidaridad desde la Economía Social de Asturias' de ASATA,ok,19,1,0,0,0
+25,Llega el primer máster conjunto de INGENIUM: abierta la preinscripción en el Máster en Tecnología de Procesos Químicos y Bioquímicos,sin_candidatos,0,0,0,0,0
+26,La Universidad de Oviedo celebra la ceremonia de graduación de 12 estudiantes de su programa universitario para mayores PUMUO,ok,12,2,0,0,0
+27,La Universidad de Oviedo y el Principado impulsan la entrada de Asturias en el mapa nacional de la supercomputación,ok,4,4,2,0,2
+28,1.120 estudiantes se examinan de la PAU en Asturias la próxima semana,ok,2,2,0,0,0
+29,El rector de la Universidad de Castilla-La Mancha asume la presidencia semestral del Grupo 9 de Universidades,ok,1,1,2,1,1
+30,"El investigador de la Universidad de Oviedo Saúl Sal Sarria, segundo premio Luis Felipe Torrente de Divulgación sobre Medicina y Salud",ok,6,1,1,1,0
+31,La Universidad de Oviedo expresa su solidaridad con el pueblo de Venezuela tras los terremotos,sin_candidatos,0,0,0,0,0
+32,"Asturias consolida un modelo productivo más diversificado, innovador y competitivo, con al menos 15 sectores estratégicos en crecimiento",ok,3,3,4,2,2
+33,Las plantas pueden adaptarse al cambio climático en cuestión de metros,sin_candidatos,0,0,0,0,0
+34,La Universidad de Oviedo transforma las jornadas de innovación docente en un congreso científico internacional y duplica  la participación,ok,28,7,3,1,2
+35,La Jornada de Doctorado de la Universidad de Oviedo reúne a 224 investigadores e investigadoras en la nueva Escuela Internacional de Doctorado ‘Paz Suárez Rendueles’,ok,31,13,0,0,0
+36,El Campus de Mieres acoge a jóvenes de todo el Estado para abordar el ciclo intergeneracional de la pobreza,ok,1,1,0,0,0
+37,La Universidad de Oviedo cierra el ejercicio 2025 con un remanente de tesorería no afectado positivo de 776.766 euros,ok,2,2,0,0,0
+38,4Space Uniovi se clasifica por segundo año consecutivo para la final mundial del European Rover Challenge,sin_candidatos,0,0,0,0,0
+39,"El rector de la Universidad de Oviedo, Ignacio Villaverde, accede a la Vicepresidencia de la Red CRUSOE",ok,6,1,0,0,0
+40,La Universidad de Oviedo acoge la entrega de los Premios Santander X a Proyectos Emprendedores Universitarios y Startup Universitaria y la Beca Excelencia 360º,ok,29,19,2,0,2
+41,La Facultad de Economía y Empresa de la Universidad de Oviedo exhibe un archivo internacional único para entender la economía moderna,ok,5,5,4,0,4
+42,La Universidad de Oviedo y el Gobierno del Principado recuperan una guía divulgativa sobre el eclipse publicada coincidiendo con el ‘apagón’ solar del año 1905,ok,6,3,2,0,2
+43,La Universidad de Oviedo extiende su oferta académica al mes de julio con doce cursos de verano,sin_candidatos,0,0,0,0,0
+44,Un estudiante de la Universidad de Oviedo gana el premio internacional de poesía Antonio Gala,sin_candidatos,0,0,0,0,0
+45,87 jóvenes concluyen con éxito el programa Mentoring de Compromiso Asturias,ok,3,3,0,0,0
+46,La Universidad de Oviedo logra tres premios y tres accésits en las XIII Jornadas Doctorales del G-9,ok,5,3,4,3,1
+47,El Campus de Mieres acoge el acto ‘Rector Alas’ de toma de posesión y reconocimiento de cargos académicos y funcionariado,ok,5,5,0,0,0
+48,Astrónomos de Light Bridges y la Universidad de Oviedo detectan que los asteroides metálicos giran más rápido que los demás,ok,1,1,2,1,1
+49,Las mejores tesis en salud de la Universidad de Oviedo reciben los Premios RAMPRA 2026,ok,15,9,5,2,3
+50,Premio de la Comisión Histórica de Cambridge a la preservación del patrimonio histórico al edificio del Real Colegio Complutense en Harvard,sin_candidatos,0,0,0,0,0
+51,"INGENIUM avanza en Ruan hacia una nueva etapa de cooperación universitaria europea más estable, sostenible y estructurada",ok,10,10,4,2,2
+52,La Universidad de Oviedo reconoce el compromiso de estudiantes y centros con la donación de sangre,ok,3,2,0,0,0
+53,"Villaverde defiende a las universidades públicas como garantes de la libertad, la democracia y la igualdad en su investidura como doctor honoris causa por la Universidad de Rouen Normandía",ok,1,1,2,1,1
+54,"La Sala de Exposiciones de la Universidad de Oviedo inaugura ‘Raigambre’, un diálogo entre la obra de Agustín García y la poesía de Aurelio González Ovies",skip_length_limit,0,0,0,0,0
+55,Más de 300 investigadores se darán cita en Gijón en la XXX Reunión Bienal del Grupo Especializado de Química Orgánica (GEQOR 2026),sin_candidatos,0,0,0,0,0
+56,La conexión entre la internacionalización y la cooperación universitaria al desarrollo centran la reunión del G-9 de Universidades celebrada en Pamplona,ok,28,1,0,0,0
+57,El equipo masculino de la Universidad de Oviedo asciende a División de Honor del atletismo nacional,ok,3,1,0,0,0
+58,La Universidad de Oviedo identifica qué plantas alpinas tendrán más dificultades para regenerarse por el cambio climático,ok,2,1,1,1,0
+59,"Jazz Europa convertirá la Universidad de Oviedo en un espacio de creación, intercambio y conexión europea a través de la música",ok,33,1,1,0,1
+60,"El 95,12 % del estudiantado aprueba la PAU en Asturias en la convocatoria de junio",sin_candidatos,0,0,0,0,0
+61,El equipo de fútbol sala del PTGAS de la Universidad de Oviedo logra un quinto puesto en el campeonato nacional de Almería,ok,5,5,0,0,0
+62,La Universidad de Oviedo otorga el doctorado ‘Honoris Causa’ a Víctor Manuel para reconocer su trayectoria y su canto a la memoria de Asturias,ok,9,8,3,2,1
+63,"El presidente de CRUE pide un plan integral para salvaguardar la Universidad como ""ascensor social""",sin_candidatos,0,0,0,0,0
+64,"La Universidad de Oviedo convertirá sus campus universitarios en entornos más biodiversos, saludables y sostenibles",ok,4,4,1,0,1
+65,Mares Circulares entrega a la Universidad de Oviedo un banco fabricado con plástico recogido del mar en reconocimiento a su compromiso medioambiental,ok,23,1,2,2,0
+66,"Llegan los primeros INGENIUM Pathways a la Universidad de Oviedo, los nuevos itinerarios que dan una dimensión internacional al título y lo adaptan al perfil de cada estudiante",sin_candidatos,0,0,0,0,0
+67,La estudiante Ana Alonso recibe el Premio Impacto Positivo de la Universidad de Oviedo,ok,5,5,0,0,0
+68,La Facultad de Formación del Profesorado y Educación de la Universidad de Oviedo reconoce a los mejores proyectos de innovación docente de Asturias,ok,102,126,3,0,3
+69,La Universidad de Oviedo analiza los rasgos psicológicos y de personalidad en deportistas de ultrarresistencia,ok,3,2,2,0,2
+70,La Cátedra de HUNOSA recibe un premio EnerAgen por su labor de divulgación sobre las energías renovables y la transición energética,ok,4,2,0,0,0
+71,El Consejo de Gobierno da luz verde al Plan de Ordenación Docente para el próximo curso académico,ok,13,12,4,2,2
+72,"Claudia Cuesta González, del Colegio Internacional Meres, obtiene el primer premio de la XIX Olimpiada de Economía",ok,11,10,0,0,0
+73,El uso de la inteligencia artificial generativa centra las II Jornadas de Innovación Educativa del Grupo 9 de Universidades (G-9),ok,5,5,0,0,0
+74,La Universidad de Oviedo y el Ayuntamiento de Avilés celebran el 20 aniversario del Centro de Servicios,ok,23,19,0,0,0
+75,La Universidad de Oviedo y HUNOSA refuerzan su colaboración para impulsar la investigación y la formación en procesamiento de minerales,ok,1,1,3,0,3
+76,La Universidad de Oviedo y Universal Plastic firman un convenio para impulsar la innovación tecnológica aplicada a los océanos,ok,4,4,2,0,2
+77,La banda metal Midriasis se impone en la final del VII Certamen Musical de la Universidad de Oviedo,ok,12,12,0,0,0
+78,Un artículo sobre el uso del término bullying en castellano y un poema de Ángel González abren los exámenes de la PAU en Asturias,ok,3,1,0,0,0
+79,Una investigación de la Universidad de Oviedo analiza el potencial de la música para reducir el estrés en pacientes críticos,ok,11,3,3,0,3
+80,"Javier Fernández Teruelo, reelegido presidente de la Conferencia de Decanas y Decanos de Facultades de Derecho de España",ok,8,1,0,0,0
+81,Crue - Secretarías Generales aborda los principales retos normativos en la Universidad de La Laguna,ok,26,19,0,0,0
+82,Un total de 5.157 estudiantes se examinan de la PAU en Asturias la próxima semana,ok,2,1,1,0,1
+83,INGENIUM lidera la iniciativa de ocho alianzas europeas para extender la financiación Erasmus+ KA131 a los Joint Programmes,sin_candidatos,0,0,0,0,0
+84,La Universidad de Oviedo lidera un proyecto nacional para evaluar el impacto de contaminantes emergentes en los ecosistemas marinos,ok,9,9,2,2,0
+85,La Universidad de Oviedo lanza una campaña divulgativa en vídeo sobre el eclipse total de Sol con investigadores del ICTEA,ok,4,4,2,0,2
+86,La Universidad de Oviedo y Gonvarri Metal Structures R&D crean una cátedra conjunta para impulsar la innovación y la transformación industrial en Asturias,ok,2,4,2,1,1
+87,"La Universidad de Oviedo inviste como doctora ‘Honoris Causa’ a la científica francesa Emmanuelle Charpentier, Premio Nobel de Química en 2020",ok,7,2,5,5,0
+88,La Universidad de León acoge la cumbre nacional de decanos y decanas de facultades de Derecho para abordar la IA y el futuro de la docencia jurídica,ok,9,9,0,0,0
+89,Estudiantes de ocho centros escolares participan en la primera Olimpiada de Promoción de la Salud de Asturias,ok,6,6,1,1,0
+90,El grupo 9 de Universidades aborda el impacto de la inteligencia artificial en la investigación en un contexto de cambio acelerado,ok,2,2,0,0,0
+91,Ayrton Suárez Arana recibe el Premio a la Excelencia Académica del Máster en Recursos Geológicos e Ingeniería Geológica,sin_candidatos,0,0,0,0,0
+92,"El bono social eléctrico reduce la pobreza energética, pero no llega a los hogares más vulnerables",ok,5,2,2,0,2
+93,"Ignacio Villaverde, rector de la Universidad de Oviedo, entra en la Junta Rectora de CRUE como presidente de la sectorial de Secretarías Generales",ok,21,1,0,0,0
+94,"Una investigación de la Universidad de Oviedo revela que las semillas no germinan cuando pueden, sino cuando les conviene",ok,3,2,3,0,3
+95,La estrategia integral de descarbonización del proyecto ORIGEN gana el premio “Phoenix Contact Net Zero”,ok,5,2,0,0,0
+96,La Universidad de Oviedo logra 15 medallas en los Campeonatos de España Universitarios de 2026,ok,19,17,0,0,0
+97,La Universidad de Oviedo convoca la beca del Instituto Cervantes de la lengua y las culturas hispánicas de los Estados Unidos en Harvard,sin_candidatos,0,0,0,0,0
+98,La Universidad de Oviedo lanza la primera formación oficial de la alianza INGENIUM,ok,3,1,1,0,1
+99,"La Universidad de Oviedo y el Colegio Oficial de Trabajo Social de Asturias renuevan su alianza en formación, investigación y promoción profesional",ok,10,4,0,0,0
+100,La Universidad de Oviedo reúne diez miradas científicas sobre el eclipse solar en una exposición divulgativa abierta a toda Asturias,ok,24,23,5,0,5
+101,"Nace Quantum Asturias, la alianza que consolida el posicionamiento de Asturias como referente en el ecosistema de tecnologías cuánticas",ok,1,1,2,2,0
+102,Elías García Fuentes presenta su visión del territorio en la Sala de Exposiciones de la Universidad de Oviedo para rememorar la huella de su padre,ok,1,1,0,0,0
+103,"Caja Rural de Asturias refuerza su compromiso con la Universidad de Oviedo con una alianza de 2,5 millones de euros",ok,5,5,0,0,0
+104,Un egresado de la Universidad de Oviedo participa en un coloquio con los mejores talentos universitarios en la Junta General de Accionistas de Universia,ok,2,1,0,0,0
+105,El Consejo de Estudiantes de la Universidad de Oviedo inicia un nuevo mandato con Pelayo Alonso Buelga como presidente,sin_candidatos,0,0,0,0,0
+106,Cerca de 1.200 estudiantes participan en las Jornadas de Puertas Abiertas de la Universidad de Oviedo,ok,2,1,0,0,0
+107,La Universidad de Oviedo asiste a la entrega de los restos exhumados e identificados de la fosa común de La Caridad,ok,4,2,1,0,1
+108,La Universidad de Oviedo recibe la distinción de la Red Nacional de Unidades de Cultura Científica y de la Innovación por el proyecto divulgativo ‘Los ‘por qué’ de los niños’,ok,4,3,3,0,3
+109,INGENIUM se suma a la petición del sector universitario para que el Parlamento Europeo mantenga la financiación de la educación superior en el Fondo Europeo de Competitividad,sin_candidatos,0,0,0,0,0
+110,INGENIUM presenta su convocatoria conjunta de Blended Intensive Programmes para el curso 2026/2027,sin_candidatos,0,0,0,0,0
+111,La Universidad de Oviedo se suma a la declaración de las universidades españolas a favor del comercio justo y el consumo responsable,sin_candidatos,0,0,0,0,0
+112,Un estudio sobre ejercicio físico y cáncer en adolescentes recibe los Premios Nacionales de Investigación en Medicina del Deporte Fundación Cajastur,ok,11,1,0,0,0
+113,Una egresada de la Universidad de Oviedo accede a la lista de los 111 jóvenes talentos de España,ok,1,1,2,1,1
+114,La spin-off de la Universidad de Oviedo Plexigrid inaugura el Centro de Control del Futuro que emplea la inteligencia artificial para la gestión del sistema eléctrico,ok,11,5,2,0,2
+115,INGENIUM reabre la convocatoria para que el profesorado proponga colaboraciones docentes con otras universidades y comparta sus asignaturas con el alumnado de toda la alianza,sin_candidatos,0,0,0,0,0
+116,La Universidad de Oviedo renueva la Marca Asturiana de Excelencia en Igualdad,ok,4,4,0,0,0
+117,La Universidad de Oviedo identifica 99 tipos de hábitats en la región ibero-atlántica,ok,1,1,2,1,1
+118,La Universidad de Oviedo y el Principado crean la Cátedra de Políticas Públicas para impulsar su análisis y evaluación en Asturias,ok,7,7,2,0,2
+119,Europa exporta los coches usados más contaminantes hacia países con regulaciones ambientales más laxas,ok,1,1,2,0,2
+120,El Campus de Mieres acoge el II Encuentro de la Red DESP-OB para avanzar en el análisis del despoblamiento en España,ok,3,3,2,1,1
+121,La Universidad de Oviedo aprueba la convocatoria de 129 plazas de profesorado para cubrir las necesidades docentes del próximo curso,ok,6,4,3,0,3
+122,PlaBiTe gana los Premios EmprendeXXI en Asturias como la start-up con mayor potencial,ok,1,1,0,0,0
+123,Profesores y estudiantes de la Universidad de Oviedo participan en Lituania en el tercer curso piloto del proyecto europeo TEDI,ok,2,1,2,0,2
+124,Investigadores de la Universidad de Oviedo apuntan al valor de la prevención escolar para mejorar la salud mental adolescente,ok,30,5,3,1,2
+125,La Universidad de Oviedo acoge las jornadas de trabajo del proyecto europeo Genera-Copa,sin_candidatos,0,0,0,0,0
+126,La Universidad de Oviedo luce la primera escultura de Pablo Serrano en la capital asturiana,ok,2,1,0,0,0
+127,Un estudio de la Universidad de Oviedo refleja que al menos un tercio de la población española no sigue pautas alimentarias saludables,ok,5,5,3,0,3
+128,La Universidad de Oviedo ensaya el gran eclipse total de agosto con una observación abierta a la sociedad este 29 de abril,ok,5,6,3,0,3
+129,Villaverde defiende un cambio de modelo en la movilidad académica hacia alianzas más estructuradas y equitativas,ok,6,1,3,0,3
+130,La Universidad de Oviedo lucirá en su edificio de la calle Independencia la primera escultura de Pablo Serrano en la capital asturiana,ok,2,1,0,0,0
+131,"Las universidades del G-9 analizan en Palma cambios en la docencia, la evaluación y la ordenación académica",ok,2,1,1,1,0
+132,"La Universidad de Oviedo lleva la cultura, la ciencia y el conocimiento a los concejos asturianos con su programa Cultura Cercana",ok,3,2,0,0,0
+133,Las láminas didácticas de la Cátedra de Cambio Climático se alzan con un premio internacional de ilustración,ok,10,9,8,0,8
+134,La Defensoría Universitaria de la Universidad de Oviedo superó las 300 actuaciones durante el año pasado,ok,2,2,1,0,1
+135,La Universidad de Oviedo acerca el patrimonio cultural a la sociedad con visitas guiadas gratuitas en el Día Internacional de los Monumentos y los Sitios,ok,1,1,0,0,0
+136,"Alcón destaca el papel de las alianzas y la internacionalización en el futuro de la universidad en la presentación de ""Universidad 2026""",ok,1,1,0,0,0
+137,La Universidad de Oviedo impulsa su proyección cultural con una edición extendida del Festival musicUO,ok,9,9,3,0,3
+138,La alianza INGENIUM supera su primera evaluación internacional que destaca su potencial transformador y solidez cultural,ok,1,1,3,1,2
+139,La Sala de Exposiciones de la Universidad de Oviedo invita a la reflexión a través del arte contemporáneo brasileño,ok,3,3,1,0,1
+140,Una investigación de la Universidad de Oviedo revela que las empresas europeas aún ocultan gran parte de su impacto ambiental,ok,2,2,2,0,2
+141,La alianza INGENIUM se somete en Oviedo a su primera evaluación internacional,ok,3,1,0,0,0
+142,Ingenieros españoles y británicos prueban con éxito un sistema híbrido de energía solar y fuentes nucleares para alimentar misiones espaciales,ok,11,1,3,1,2
+143,El Museo de la Ciencia de Valladolid instala en su exposición permanente la primera tabla periódica del mundo en lengua de signos,ok,1,1,2,0,2
+144,La alianza europea INGENIUM pondrá en marcha el próximo curso académico su primer máster oficial,ok,8,5,2,1,1
+145,La Universidad alerta de una campaña masiva de correos fraudulentos que reclama supuestos pagos pendientes de matrícula.,sin_candidatos,0,0,0,0,0
+146,CRUE celebra su primera Asamblea General del año en Baleares con el reto de redefinir la financiación de las universidades públicas,ok,2,2,0,0,0
+147,Nueve de cada diez adolescentes asturianos consumen bebidas azucaradas de forma habitual u ocasional,ok,4,4,3,0,3
+148,Las universidades españolas debaten en Granada sobre títulos propios y microcredenciales,sin_candidatos,0,0,0,0,0
+149,Un estudio internacional revela que las aves de montaña son únicas y especialmente vulnerables al cambio climático,ok,1,1,0,0,0
+150,INGENIUM presenta una nueva convocatoria para financiar la creación de grupos conjuntos de investigación,sin_candidatos,0,0,0,0,0
+151,La Universidad de Oviedo avanza en su nuevo modelo de docencia para afrontar los desafíos formativos del siglo XXI,ok,2,2,3,2,1
+152,Las universidades del G-9 abordan en Bilbao la implantación de la IA y la eficiencia de la administración electrónica,sin_candidatos,0,0,0,0,0
+153,La mayoría de los universitarios fallan al distinguir noticias científicas verdaderas y falsas publicadas en redes sociales,ok,3,3,3,1,2
+154,Las insignias de oro y plata de la Universidad de Oviedo reconocen el compromiso del personal que alcanza la jubilación tras varias décadas de trabajo,ok,2,2,0,0,0
+155,"El rector inaugura la exposición “Lángara, el señor de los goles”",ok,11,2,0,0,0
+156,Investigadores de la Universidad de Oviedo revelan la falta de programas para abordar el tabaquismo en personas con discapacidad intelectual,ok,13,2,4,1,3
+157,"La estudiante asturiana Raquel Hidalgo Suárez, del IES Aramo (Oviedo), logra la medalla de bronce en la Olimpiada Española de Biología",ok,3,3,0,0,0
+158,Los profesores de la Universidad de Oviedo Celestino Rodríguez y Marisol Cueli logran el premio Samuel Kirk al mejor artículo internacional sobre dificultades de aprendizaje,ok,1,1,2,1,1
+159,La Universidad de Oviedo registra un récord de ofertas laborales en el Foro de Empleo con 175 puestos para 44 empresas,ok,5,5,0,0,0
+160,Las universidades del G-9 apuestan por dar más voz al estudiantado e integrar sus propuestas en las actividades del Grupo,sin_candidatos,0,0,0,0,0
+161,"El investigador Jorge González-Rodríguez, del Departamento de Química Orgánica e Inorgánica de la Universidad de Oviedo, se alza con el Premio AsturChem2025",ok,45,5,2,0,2
+162,El grupo de Universidades G-9 logra financiación europea para impulsar actividades como la Noche Europea de los Investigadores,sin_candidatos,0,0,0,0,0
+163,La Universidad de Oviedo pone en valor el legado de Aurora de Albornoz en el centenario de su nacimiento,ok,35,8,3,1,2
+164,Un estudio sobre ejercicio físico y cáncer en adolescentes gana los Premios Nacionales de Investigación en Medicina del Deporte Fundación Cajastur,ok,7,4,1,0,1
+165,La Universidad de Oviedo participa en el premio Goncourt–La elección de España 2025,sin_candidatos,0,0,0,0,0
+166,"El equipo 4Space UniOvi gana el primer premio en los Student Talent Awards de Rumanía con ‘Trastu’, un robot diseñado para desplazarse por Marte",sin_candidatos,0,0,0,0,0
+167,El laboratorio MediaLab de la Universidad de Oviedo obtiene el premio Ingeniería para las Personas por el diseño y fabricación de prótesis impresas en 3D,ok,24,1,2,1,1
+168,El equipo de la Universidad de Extremadura gana la XVI Liga de Debate Interuniversitario del Grupo 9 de Universidades,ok,5,1,0,0,0
+169,El seguimiento por GPS de la fauna silvestre revela carencias clave en la evaluación ambiental de los parques eólicos,ok,1,1,1,0,1
+170,La Universidad de Oviedo potencia el Foro de Empleo con más empresas y nuevos espacios para quienes buscan trabajo,ok,4,4,0,0,0
+171,España y Perú refuerzan la cooperación universitaria en un encuentro bilateral de rectores y rectoras en Lima,ok,36,1,0,0,0
+172,La Universidad de Oviedo celebra 25 años impulsando la transferencia de conocimiento y la divulgación científica,ok,2,2,3,1,2
+173,La Universidad de Oviedo visibiliza 20 investigaciones con perspectiva de género en su acto institucional por el 8M,ok,21,21,0,0,0
+174,La Universidad de Oviedo visibiliza 20 investigaciones con perspectiva de género en su acto institucional por el 8M,ok,4,4,1,1,0
+175,Noelia López Souto gana el Premio de Investigación Instituto Feijoo de Estudios del Siglo XVIII 2026,ok,6,4,1,0,1
+176,Un estudio de la Universidad de Oviedo identifica un biomarcador clave para entender el entrenamiento en medallistas olímpicos,ok,24,4,10,2,8
+177,"La Universidad de Iaşi (Rumanía) invita a 10 estudiantes de INGENIUM a unirse al ‘BEST International Symposium 2026’ sobre movilidad e inclusión, que se desarrollará en julio",sin_candidatos,0,0,0,0,0
+178,Alcón aboga por la cooperación institucional y la inversión sostenida para fortalecer la docencia universitaria en las V Jornadas de Crue-Docencia en la UJI,ok,2,2,0,0,0
+179,La Cátedra de Evaluación de las Políticas de Empleo presenta un modelo estadístico para mejorar la empleabilidad en Asturias,ok,7,4,3,0,3
+180,El equipo Divergencia representará a la Universidad de Oviedo en la XVI Liga de Debate Interuniversitario del G-9,ok,6,6,0,0,0
+181,"Coral Garrido, del IES Padre Feijóo, gana la Olimpiada Asturiana de Geología",ok,13,12,1,0,1
+182,"El G-9 registra 9.673 inscripciones en el XIII Plan PTGAS 2026, que comienza este lunes 2 de marzo",ok,1,1,0,0,0
+183,La Universidad de Oviedo aprueba su Plan de Transformación Institucional para consolidar el Campus Europeo INGENIUM,ok,2,2,0,0,0
+184,Comunicado de la Universidad de Oviedo sobre las informaciones aparecidas en relación al traslado de la Facultad de Ciencias al futuro Campus de El Cristo,ok,1,1,0,0,0
+185,Alcón sitúa el diálogo y la equidad en el centro del VII Congreso CREUP-CRUE,sin_candidatos,0,0,0,0,0
+186,La Universidad de Oviedo incorpora a su herbario más de 1.600 pliegos micológicos donados por el naturalista Alberto Román,ok,6,6,0,0,0
+187,"El rector de la Universidad de Oviedo, Ignacio Villaverde, recibirá el doctorado Honoris Causa por la Universidad de Rouen Normandía",ok,1,1,2,2,0
+188,La Universidad de Oviedo analiza cómo la protección marina afecta a la pesca artesanal en el Cantábrico,ok,6,5,5,1,4
+189,España e India refuerzan la cooperación universitaria con una cumbre bilateral en Nueva Delhi,ok,12,1,0,0,0
+190,Biología entrega los premios de la XIX edición de su olimpiada asturiana,ok,3,3,0,0,0
+191,La Cátedra de Innovación de la Universidad de Oviedo y el Principado identificará sectores estratégicos para el futuro económico y tecnológico de Asturias,ok,3,3,3,1,2
+192,El ceisIA abandona Lugones ante el bloqueo del Ayuntamiento de Siero,ok,4,3,1,0,1
+193,INGENIUM impulsa una segunda edición de las Student Partnerships: el programa que financia las ideas innovadoras del estudiantado,sin_candidatos,0,0,0,0,0
+194,La Universidad de Oviedo caracteriza las lesiones inguinales deportivas con el mayor estudio realizado hasta la fecha,ok,2,2,2,0,2
+195,"La Universidad de Oviedo recibe a Pete Worden, una de las figuras más influyentes del ámbito espacial internacional",ok,2,1,0,0,0
+196,"El equipo 4Space UniOvi, nominado al Young Talent Award 2026 de la EduNet World Association",sin_candidatos,0,0,0,0,0
+197,La Universidad de Oviedo arranca unas jornadas de orientación en las que participan 126 centros educativos asturianos,ok,4,4,0,0,0
+198,Materiales ultraestables del CINN listos para analizar la atmósfera de Marte,ok,8,3,4,0,4
+199,Más de 60 investigadoras de la Universidad de Oviedo participarán en la conmemoración del Día Internacional de la Mujer y la Niña en la Ciencia,ok,2,1,2,0,2
+200,La Universidad de Oviedo actualiza su Plan de Prevención del Fraude y la Corrupción para adaptarlo a la legislación vigente,sin_candidatos,0,0,0,0,0
+201,El G-9 valora la confirmación del Ministerio sobre la estabilidad económica de las plazas del programa María Goyri,ok,3,3,0,0,0
+202,"CRUE presenta a CEPYME el proyecto ""Transferencia e Impacto Social"" para acercar soluciones universitarias a las necesidades de las pymes",sin_candidatos,0,0,0,0,0
+203,Más de 10.000 estudiantes preuniversitarios conocerán la oferta académica de la Universidad de Oviedo en unas jornadas de orientación de récord,ok,2,1,0,0,0
+204,Dos monografías del Servicio de Publicaciones de la Universidad de Oviedo obtienen el sello de calidad en edición académica CEA-APQ 2025,ok,14,2,1,0,1
+205,Comunicado sobre las informaciones aparecidas en relación con la Facultad de Ciencias y la futura Ciudad de la Justicia,sin_candidatos,0,0,0,0,0
+206,La Universidad de Oviedo impulsa la formación internacional en ingeniería con el segundo curso piloto del proyecto europeo TEDI,sin_candidatos,0,0,0,0,0
+207,Un estudio de la Universidad de Oviedo identifica una amplia diversidad de hongos asociados a las raíces del roble albar cantábrico,ok,6,2,3,0,3
+208,Última oportunidad para vivir los 10 Days de INGENIUM: abierta la convocatoria para la séptima edición en Bulgaria e Irlanda,sin_candidatos,0,0,0,0,0
+209,Los IX Premios EDUCA ABANCA a los mejores docentes de 2025 distinguen al profesor de la Universidad de Oviedo Andrés Meana Fernández,ok,1,1,0,0,0
+210,"La Universidad de Oviedo aprueba una oferta de 1.774 plazas de Máster Universitario para el curso 2026-2027, con dos nuevas titulaciones",ok,3,3,3,1,2
+211,Investigadores de la Universidad de Oviedo copan las convocatorias científicas del Principado,ok,34,9,8,0,8
+212,Las Secretarías Generales del G-9 analizan sus estructuras y comparten experiencias organizativas y de desarrollo normativo,ok,1,1,0,0,0
+213,La Facultad de Psicología de la Universidad de Oviedo ofrece tratamientos novedosos para dejar de fumar tabaco y cannabis,ok,11,10,5,0,5
+214,La Alianza INGENIUM acuerda en Rumanía los pasos clave para su consolidación como universidad europea,ok,2,2,4,1,3
+215,La doctora por la Universidad de Oviedo Nerea López Bouzas recibe el premio Fundación ONCE a la Investigación por una tesis sobre comunicación en personas con autismo,ok,1,1,2,0,2
+216,La Sala de Exposiciones de la Universidad de Oviedo se abre a la atmósfera pictórica de Paz Banciella,ok,3,1,1,0,1
+217,Una investigación de la Universidad de Oviedo reconstruye la evolución del estuario del Nalón desde el Pleistoceno hasta la actualidad,ok,2,2,4,0,4
+218,El rector defiende la universidad pública como un servicio al bien común durante su intervención en la festividad de Santo Tomás de Aquino,ok,3,3,5,2,3
+219,El proyecto de dinamización universitaria de la Casa de la Buelga incorpora a la Fundación Caja Rural de Asturias,sin_candidatos,0,0,0,0,0
+220,El rector reivindica la Extensión Universitaria como seña de identidad de la Universidad de Oviedo en la toma de posesión de Marta Mateo como vicerrectora,ok,2,2,3,1,2
+221,La Universidad de Oviedo refuerza su presencia en el medio rural asturiano con la creación de una red de embajadores y embajadoras,ok,3,3,0,0,0
+222,La Cátedra de Cultura Científica pulsará la opinión de la sociedad asturiana sobre el valor de la ciencia,ok,10,5,3,0,3
+223,Seis revistas del Servicio de Publicaciones de la Universidad de Oviedo renuevan su sello de calidad nacional,ok,6,6,0,0,0
+224,"La Universidad de Oviedo impulsa la conexión entre ciencia, empresa y sociedad con la Segunda Semana de la Transferencia",ok,2,2,2,0,2
+225,El rector renueva su equipo de gobierno con la incorporación de Marta Mateo como nueva vicerrectora de Extensión Universitaria y Proyección Cultural,ok,3,2,1,1,0
+226,Un proyecto europeo con participación de la Universidad de Oviedo impulsará la igualdad de género y la diversidad en las carreras científicas,ok,2,2,8,0,8
+227,La rectora de la Universidad de Zaragoza asume la presidencia del Grupo G9 de Universidades durante el primer semestre de 2026,ok,6,6,0,0,0
+228,La Universidad de Oviedo supera por primera vez el millar de matrículas en el Programa Universitario de Mayores,ok,11,5,4,0,4
+229,INGENIUM presenta un nuevo módulo online sobre ética e integridad científica coordinado por la Universidad Tecnológica de Munster (Irlanda),sin_candidatos,0,0,0,0,0
+230,El Campus de Gijón de la Universidad de Oviedo incorpora una red privada 5G pionera en Asturias,ok,11,6,5,5,0
+231,Un sistema basado en inteligencia artificial permite estimar la edad legal de una persona con un alto nivel de exactitud,sin_candidatos,0,0,0,0,0
+232,La combinación de un clima extremo y vegetación lista para arder intensificó los incendios récord de 2025 en España,sin_candidatos,0,0,0,0,0
+233,La Universidad de Oviedo y el Ayuntamiento de Avilés firman una alianza estratégica,ok,13,13,3,2,1
+234,Un estudio de la Universidad de Oviedo gana el premio Lola Martínez a la mejor investigación en Igualdad y Género,ok,2,1,2,0,2
+235,Un equipo de la Universidad de Oviedo lidera un estudio que define las reglas para el control de la nanoluz en la escala atómica,ok,6,3,1,0,1
+236,Los pesticidas son tan importantes como la pérdida de hábitats en el declive global de las abejas silvestres en los cultivos,ok,5,5,2,0,2
+237,Más de 27000 personas participaron en las 500 actividades coordinadas por la UCC+I de la Universidad de Oviedo en 2025,sin_candidatos,0,0,0,0,0
+238,La Cátedra de Salud Comunitaria y Promoción de la Salud entrega sus premios a los mejores trabajos fin de titulación,ok,27,2,2,0,2
+239,25 tesis doctorales leídas en el curso 2023-2024 recibirán el Premio Extraordinario de Doctorado,ok,4,4,1,1,0
+240,El lienzo ‘Cristo presentado al pueblo’ recupera su valor artístico original tras ser sometido a una restauración integral,ok,2,1,1,0,1
+241,"Abierta la convocatoria para el BIP en ‘Labour and Social Justice’, dirigido a estudiantes de Derecho",sin_candidatos,0,0,0,0,0
+242,"Abierta la convocatoria para el BIP en ‘Rare Neurogenetic Diseases’, dirigido a estudiantes de Medicina",sin_candidatos,0,0,0,0,0
+243,El Principado y la Universidad de Oviedo ponen en marcha el primer Erasmus Rural,ok,4,2,0,0,0
+244,La Universidad de Oviedo entrega los Premios a los Mejores Trabajos Fin de Grado de las Cátedras AACSB de la Facultad de Economía y Empresa,ok,29,29,1,0,1
+245,La Universidad de Oviedo rinde homenaje a ‘La Regenta’ con una exposición de más de 80 publicaciones que invitan a redescubrir la obra cumbre de Clarín,ok,7,4,2,0,2
+246,La Universidad de Oviedo ‘exporta’ su experiencia con el túnel del viento a la Universidad de Princeton,ok,4,1,5,3,2
+247,INCIBE Emprende y la Universidad de Oviedo abordan el marco legal y el cumplimiento normativo en ciberseguridad para startups,sin_candidatos,0,0,0,0,0
+248,La Universidad de Oviedo inaugura la Escuela Internacional de Doctorado Paz Suárez Rendueles,ok,8,1,0,0,0
+249,El IUOPA destaca en su gala del 25º aniversario que los avances contra el cáncer solo son posibles gracias a la investigación,ok,7,3,2,1,1
+250,La Universidad de Oviedo y la Fundación Alimerka renuevan su colaboración para impulsar proyectos de interés social,ok,2,1,0,0,0
+251,Tres egresados de la Universidad de Oviedo logran los Premios Nacionales Fin de Carrera,ok,13,12,2,2,0
+252,Un estudio del Serida y la Universidad de Oviedo revela el impacto de la fauna silvestre en el control de las plagas y en la sostenibilidad de los frutales asturianos,ok,17,4,4,0,4
+253,Un equipo de investigación revela detalles inéditos de las colonias de cría de paíños europeos y cormoranes moñudos,ok,2,1,3,1,2
+254,La Universidad de Oviedo acoge la exposición ‘39 miradas y una esperanza’ en el Día de los Derechos Humanos’,ok,2,2,0,0,0
+255,El seguimiento con dispositivos GPS de especies silvestres identifica limitaciones en la planificación para instalar energías renovables como la eólica,ok,1,1,0,0,0
+256,"El Consejo de Gobierno aprueba un presupuesto de 271,3 millones para 2026, con un refuerzo para la investigación y para los centros y departamentos",ok,1,1,2,0,2
+257,El rector propondrá a Emma Ramos para la gerencia de la Universidad de Oviedo tras la jubilación de José Antonio Díaz Lago,ok,2,2,0,0,0
+258,Investigadores de la Universidad de Oviedo estudian cómo las grandes presas impactan en la conservación del desmán ibérico,ok,13,3,2,1,1
+259,Interculturalidad y educación financiera: concluyen en Oviedo los primeros proyectos de INGENIUM liderados por estudiantes,ok,3,3,3,0,3
+260,Inserta Empleo y La Universidad de Oviedo acercan la discapacidad al ámbito universitario en la jornada ‘Accesibilidad e inclusión: compromiso de tod@s’,ok,2,2,0,0,0
+261,La Universidad de Oviedo revitaliza el envío de postales para felicitar la Navidad con mensajes científicos,sin_candidatos,0,0,0,0,0
+262,CRUE se suma a la celebración del Día Internacional de las Personas con Discapacidad,sin_candidatos,0,0,0,0,0
+263,"La empleabilidad, la calidad científica y la financiación centran las conclusiones de la nueva edición de La Universidad Española en Cifras",ok,4,1,2,0,2
+264,El profesor Roger Campione presenta en la Universidad de Florencia el documental ‘La guerra de las máquinas’,ok,16,4,4,0,4
+265,La Universidad de Oviedo aprueba la modificación sustancial de los planes de estudios de cinco másteres universitarios,ok,2,2,2,1,1
+266,Micaela Moya Cedrola obtiene el XI Premio Internacional de Investigación Literaria “Ángel González” con una obra sobre el amor y el erotismo en cinco poetas españolas,ok,2,1,0,0,0
+267,El G-9 distingue con su Premio de Investigación en Estudios de Género un TFM de la Universidad de Oviedo sobre la violencia obstétrica en Nigeria,ok,5,1,1,0,1
+268,Tres investigadores de la Universidad de Oviedo reciben distinciones en el XXI Certamen Universitario Arquímedes,ok,18,6,7,1,6
+269,La Sala de Exposiciones de la Universidad de Oviedo se abre a las emociones de Marcos Tamargo para cerrar el año,ok,9,2,0,0,0
+270,La Asamblea General de CRUE aborda los principales retos del sistema universitario,ok,1,1,0,0,0
+271,Día Internacional de la Eliminación de la Violencia contra la Mujer,ok,3,3,0,0,0
+272,La Universidad de Oviedo y la empresa china Sino-Foundry Refractory crean una cátedra para impulsar la investigación en sostenibilidad de materiales refractarios,ok,6,1,2,0,2
+273,El rector defiende la capacidad de la universidad para cambiar las vidas y mejorar el mundo con motivo de la festividad de Santa Catalina de Alejandría,ok,8,8,1,1,0
+274,"El flamenco, las poetas del 27, las comparsas de Cádiz y el repentismo se unen en los enCOHENtros 2025 de la Cátedra Leonard Cohen",ok,17,15,1,1,0
+275,La Universidad de Oviedo renueva su Consejo Asesor de Políticas Universitarias con 11 perfiles vinculados a la investigación y a la empresa,ok,11,8,1,0,1
+276,El G9 analiza su estrategia conjunta de internacionalización en la reunión celebrada en Toledo,ok,30,25,0,0,0
+277,La Fundación la Caixa otorga una ayuda de casi un millón de euros a un proyecto en el que participa la Universidad de Oviedo,ok,2,2,1,0,1
+278,Los premios IPfest reconocen la labor de investigadora y de transferencia de la Universidad de Oviedo,ok,3,2,2,0,2
+279,Un estudio de la Universidad de Oviedo y el Ayuntamiento de Gijón revela que los solares vacíos pueden impulsar la biodiversidad urbana,ok,1,1,1,0,1
+280,Alcón reivindica la necesidad del sexenio de transferencia en las Jornadas de Investigación que acoge la Universidade de Vigo,ok,3,3,0,0,0
+281,La Universidad de Oviedo y el Ayuntamiento de Langreo refundan La Casa de la Buelga como un eje dinamizador del Valle del Nalón,ok,3,3,1,1,0
+282,‘Business Model Canvas’: ya disponible el curso online de INGENIUM para emprendedores e innovadores,sin_candidatos,0,0,0,0,0
+283,La Universidad de Oviedo reúne a más de 60 estudiantes de todo el país en el primer Hackathon Internacional de Ciberseguridad organizado junto al INCIBE,sin_candidatos,0,0,0,0,0
+284,La UNE elige nueva junta directiva para el bienio 2025-2027,ok,5,1,0,0,0
+285,Las universidades del G-9 reclaman mayor claridad en la normativa a la ANECA,ok,1,1,0,0,0
+286,La Universidad de Oviedo y el Ayuntamiento de Salas firman un convenio para dar continuidad al Aula Valdés-Salas,ok,1,1,0,0,0
+287,La Universidad de Oviedo recibe el Premio Nacional de Edición Universitaria a la mejor monografía en Artes y Humanidades,ok,1,1,0,0,0
+288,El rector presenta ante el Claustro de la Universidad de Oviedo el informe de gestión del pasado curso,ok,1,1,3,2,1
+289,La Universidad de Oviedo participa en un estudio nacional que analiza cómo influye tener animales en los primeros años de vida en el desarrollo emocional infantil,sin_candidatos,0,0,0,0,0
+290,La Universidad de Oviedo y FICYT crean la Cátedra de Cultura Científica para impulsar la divulgación y analizar la percepción de la ciencia en Asturias,ok,4,2,1,1,0
+291,Estudiantes de la Universidad de Oviedo ganan un hackathon en México con su propuesta para transformar residuos de la producción de tequila en bioplásticos,ok,10,2,2,0,2
+292,La Cátedra Cogersa inaugura su IV Semana de la Circularidad,ok,7,5,3,1,2
+293,Abierta la inscripción para las II Jornadas sobre la Soledad y salud en jóvenes y mayores: hacia un bienestar intergeneracional,sin_candidatos,0,0,0,0,0
+294,Un equipo de investigación de la Universidad de Oviedo prueba técnicas para detectar a simple vista fraudes en la comercialización de invertebrados marinos,ok,2,2,2,0,2
+295,TotalEnergies da la bienvenida a 25 estudiantes de la Universidad de Oviedo en la quinta edición de su programa de becas,ok,2,1,0,0,0
+296,INGENIUM invita a la comunidad universitaria a construir la oferta académica del futuro,sin_candidatos,0,0,0,0,0
+297,El Máster en Género y Diversidad de la Universidad de Oviedo recibe el premio Menina 2025 de la Delegación del Gobierno en Asturias,ok,2,1,2,0,2
+298,Decanas y decanos de Facultades de Derecho de España reclaman pruebas presenciales y territoriales de acceso a la abogacía y procura,ok,13,13,0,0,0
+299,La Semana de la Ciencia y la Innovación de la Universidad de Oviedo cumple 25 años y se consolida como el mayor evento de divulgación de Asturias,ok,30,19,1,0,1
+300,La Universidad de Oviedo y el Principado crean una cátedra para afrontar los principales desafíos demográficos de Asturias,ok,2,2,2,0,2
+301,"La actividad emprendedora continúa creciendo en Asturias, según el informe GEM 2024-2025",ok,12,4,2,0,2
+302,Planes estratégicos 2022,sin_candidatos,0,0,0,0,0
