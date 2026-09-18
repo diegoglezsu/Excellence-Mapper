@@ -1,4 +1,4 @@
-# UO-News
+# Excellence-Mapper
 
 ## Get Started
 
